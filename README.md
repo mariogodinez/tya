@@ -1,6 +1,6 @@
-# dd
+# Tya register problem
 
-> A Vue.js initializer project made with browserify and love xD
+> A problem reporter to get insights
 
 ## Build Setup
 
@@ -11,6 +11,12 @@ npm install
 # serve with hot reload at localhost:8080
 npm run dev
 
+# compile and watch styles changes
+npm run styles
+
+#compile js and keep watching changes
+npm run watchify
+
 # build for production with minification
 npm run build
 
@@ -18,4 +24,3 @@ npm run build
 npm run lint
 ```
 
-more information see the [docs for vueify](https://github.com/vuejs/vueify).
