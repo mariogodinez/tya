@@ -1,0 +1,104 @@
+=border($x, $type, $color)
+  -webkit-border: $x $type $color
+  -moz-border:    $x $type $color
+  -ms-border:     $x $type $color
+  -o-border:     $x $type $color
+  border:         $x $type $color
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  -o-border-radius:     $radius
+  border-radius:         $radius
+
+=border-bottom-right-radius($radius)
+  -webkit-border-bottom-right-radius: $radius
+  -moz-border-bottom-right-radius:    $radius
+  -ms-border-bottom-right-radius:     $radius
+  -o-border-bottom-right-radius:     $radius
+  border-bottom-right-radius:         $radius
+
+=border-left-radius($radius)
+  -webkit-border-left-radius: $radius
+  -moz-border-left-radius:    $radius
+  -ms-border-left-radius:     $radius
+  -o-border-left-radius:     $radius
+  border-left-radius:         $radius
+
+=text-shadow($x, $y, $z, $color)
+  -webkit-text-shadow: $x $y $z $color
+  -moz-text-shadow: $x $y $z $color
+  -ms-text-shadow: $x $y $z $color
+  -o-text-shadow: $x $y $z $color
+  text-shadow: $x $y $z $color
+
+=box-shadow($x, $y, $z, $r, $color)
+  -webkit-box-shadow: $x $y $z $r $color
+  -moz-box-shadow: $x $y $z $r $color
+  -ms-box-shadow: $x $y $z $r $color
+  -o-box-shadow: $x $y $z $r $color
+  box-shadow: $x $y $z $r $color
+
+=transform($transform)
+  -webkit-transform: $transform 0.5s ease
+  -moz-transform: $transform 0.5s ease
+  -ms-transform: $transform 0.5s ease
+  -o-transform: $transform 0.5s ease
+  transform: $transform 0.5s ease
+
+=transition($transition, $time, $effect)
+  -webkit-transition: $transition $time $effect
+  -moz-transition: $transition $time $effect
+  -ms-transition: $transition $time $effect
+  -o-transition: $transition $time $effect
+  transition: $transition $time $effect
+
+=filter($filter-type,$filter-amount)
+  -webkit-filter: $filter-type+unquote('(#{$filter-amount})')
+  -moz-filter: $filter-type+unquote('(#{$filter-amount})')
+  -ms-filter: $filter-type+unquote('(#{$filter-amount})')
+  -o-filter: $filter-type+unquote('(#{$filter-amount})')
+  filter: $filter-type+unquote('(#{$filter-amount})')
+
+=flex()
+  display: -ms-flexbox
+  display: -webkit-flex
+  display: -moz-flex
+  display: -o-flex
+  display: flex
+
+=flex-align($position)
+  -ms-flex-align: $position
+  -webkit-align-items: $position
+  -moz-align-items: $position
+  -o-align-items: $position
+  align-items: $position
+
+=flex-justify($position)
+  -ms-justify-content: $position
+  -webkit-justify-content: $position
+  -moz-justify-content: $position
+  -o-justify-content: $position
+  justify-content: $position
+
+=flex-self($position)
+  -ms-align-self: $position
+  -webkit-align-self: $position
+  -moz-align-self: $position
+  -o-align-self: $position
+  align-self: $position
+
+=flex-wrap($position)
+  -ms-flex-wrap: $position
+  -webkit-flex-wrap: $position
+  -moz-flex-wrap: $position
+  -o-flex-wrap: $position
+  flex-wrap: $position
+
+=flex-direction($position)
+  -ms-flex-direction: $position
+  -webkit-flex-direction: $position
+  -moz-flex-direction: $position
+  -o-flex-direction: $position
+  flex-direction: $position

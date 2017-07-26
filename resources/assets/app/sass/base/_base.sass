@@ -1,0 +1,49 @@
+// Estilos base
+*
+	padding: 0px
+	margin: 0px
+	outline: none
+
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+
+:focus
+	outline: none !important
+
+a
+	text-decoration: none
+	&:hover, &:focus
+		text-decoration: none
+
+img
+	border: 0
+
+textarea
+	resize: none
+
+html, body
+	font-family: 'Lato', sans-serif;
+	height: 100%
+	font-size: 16px
+	overflow-x: hidden
+
+h1, h2, h3, h4, h5, h6
+	font-weight: bold
+
+.btn-yellow
+	background-color: $yellow
+	color: #fff
+	text-transform: uppercase
+	padding: 0.5em 1em
+	font-size: 1.2em
+	border: 0
+	font-weight: bold
+	cursor: pointer
+	+border-radius(2px)
+	letter-spacing: -0.5px
+
+.yellow-color
+	color: $yellow
+
+.lightgray-color
+	color: $lightgray

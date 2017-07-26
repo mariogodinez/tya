@@ -1,0 +1,59 @@
+@import './base.styl'
+@import './colors.styl'
+@import './sweetalert.styl'
+@import './utils.styl'
+@import './media.styl'
+
+
+
+body
+	margin 0
+	padding 0
+	background gris-claro
+	font-family 'Roboto', 'sans-serif'
+
+.main-content
+	padding-top 30px
+
+.app-header
+	border-bottom 2px solid #ccc
+	padding 0px 30px
+	background darkblue
+	position fixed
+	z-index 10000
+	width 100%
+	.logo
+		width 90px
+		height 40px
+		img
+			width 100%
+			height 100%
+
+.login
+	&-form
+		max-width 400px
+
+
+
+.my-nav
+	width 100%
+	height 100vh
+	background #e4e8eb
+	transition .4s
+	z-index 10000
+	position absolute
+	top 70px
+	right -100%
+	&-list
+		list-style none
+		padding 30px
+		&-item
+			border-bottom 1px solid lightgray
+			&:last-child
+				border-bottom 0px
+			a
+				color darkblue
+				font-size 1.2em
+				padding 15px 3px
+				display block
+
