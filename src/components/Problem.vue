@@ -86,14 +86,13 @@
 						<div class="flex">
 							<textarea class="margin-top15 my-input back-grisclaro" name="" id="" cols="30" rows="5" placeholder="Describe al grupo de usuarios" v-model="problemObj.usersProblem"></textarea>
 						</div>
-						
 					</div>
 
 					<div class="margin-bottom20">
 						<h4 class="margin0 font20">¿Qué es lo que 
-						<em class="color-gold relative"> 
+						<span class="color-gold relative"> 
 						<i class="ion-arrow-graph-up-right font20" style="transform: rotate(-12deg); position:absolute; top:-16px; left:12px"></i> 
-						ellos</em> intentan hacer/lograr?</h4>
+						ellos</span> intentan hacer/lograr?</h4>
 						<div class="flex">
 							<textarea class="margin-top15 my-input back-grisclaro" name="" id="" cols="30" rows="5" placeholder="¿Cúal es el objetivo/actividad deseada?" v-model="problemObj.activity"></textarea>
 						</div>

@@ -1,6 +1,6 @@
 <script >
 	export default {
-		name:'login', 
+		name:'login',
 		data() {
 			return {
 				userInfo: {
@@ -25,19 +25,20 @@
 						localStorage.token = res.data.token
 					}
 				}).catch(error=>{
-					
+					console.log(error)
 				})
+			},
+			forgotPassword(){
+				this.$router.push('/contraseña-olvidada')
 			}
 		}
 	}
 </script>
-
 <style>
 	.login{
 		background: #eceff1;
 	}
 </style>
-
 <template>
 <transition appear  name="custom-classes-transition"
     enter-active-class="animated fadeIn"
@@ -53,52 +54,48 @@
 				</h3>
 			</div>
 
-		
-			
+
+
 					<div style="border-radius: 5px 5px 0 0;" class="my-input-simple flex flex-middle">
 						<span class="margin-left10 fa fa-user font20" style="color:#666"></span>
 						<input type="email" placeholder="Email" class="my-input-simple border0" v-model="userInfo.email" style="color:#6d6d6d"
 					>
 					</div>
-					
-					
-				
+
+
+
 
 					<div style="border-radius:0;" class="my-input-simple flex flex-middle">
 						<span class="margin-left10 fa fa-user font20" style="color:#666"></span>
 						<input type="text" placeholder="Nombre" class="my-input-simple border0" v-model="userInfo.displayName" style="color:#6d6d6d"
 					>
 					</div>
-		
+
 
 					<div style="border-radius:0 0 5px 5px;" class="my-input-simple flex flex-middle">
 						<span class="margin-left10 fa fa-lock font20" style="color:#666"></span>
 						<input type="password" placeholder="Contraseña" class="my-input-simple border0" v-model="userInfo.password" style="color:#6d6d6d"
 					>
 					</div>
-	
+
 				<button class="center-block  my-btn back-gold" style="width:250px; margin:20px auto !important;" @click="sendForm">
 					<span class="font20">
 						Entrar
 					</span>
-				
+
 				</button>
-
-
 			<div class="font20 margin-bottom30">
 				<div class="margin-top10">
-					<p class="anchor color-darkblue text-center">
+					<p class="anchor color-darkblue text-center" @click="forgotPassword">
 						Olvidé mi contraseña
 					</p>
 				</div>
 			</div>
 			<div class="padding20">
-				
+
 			</div>
 		</article>
 	</section>
-
-
 </transition>
-	
+
 </template>

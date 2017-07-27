@@ -8,6 +8,11 @@ import Problem from './components/Problem.vue'
 import ProblemVote from './components/ProblemVote.vue'
 import Result from './components/ResultsMetrics.vue'
 import Users from './components/Users.vue'
+import ForgotPassword from './components/forgotPassword.vue'
+import ResetPassword from './components/ResetPassword.vue'
+import CorreoEnviado from './components/correo-enviado.vue'
+import ContraseñaExito from './components/ContraseñaExito.vue'
+
 import VueRouter from 'vue-router'
 import Vuetify from 'vuetify'
 import jQuery from 'jquery'
@@ -24,16 +29,19 @@ window.axios = require('axios')
 let routes = [
 	{path: '/login', component: Login},
 	{path: '/', component: Problem},
+	{path: '/contraseña-olvidada', component: ForgotPassword},
+	{path: '/contraseña-exito', component: ContraseñaExito},
 
 	{path: '/problem-vote', component: ProblemVote},
 	{path: '/results', component: Result},
+	{path: '/nueva-contraseña', component: ResetPassword},
 	{path: '/users', component: Users},
-
+	{path: '/correo-enviado', component: CorreoEnviado},
 
 ]
 
 let router = new VueRouter({
-	mode: 'history',
+	// mode: 'history',
 	routes
 })
 
