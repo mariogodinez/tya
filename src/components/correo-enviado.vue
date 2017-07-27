@@ -6,7 +6,7 @@
 				Se ha enviado el enlace al correo electrónico registrado.
 			</p>
 			<div class="padding5">
-				<figure class="center-block margin-top20 margin-bottom20" style="width:90px;">
+				<figure class="center-block margin-top20 margin-bottom20" style="width:80px;">
 					<img class="width100" src="/img/tick-inside-circle.svg" alt="">
 				</figure>
 			</div>

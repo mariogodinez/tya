@@ -2,8 +2,18 @@
 const Problem = require('../models/problem')
 const nodemailer = require('nodemailer')
 const config = require('../config.js')
+const hb = require('nodemailer-express-handlebars')
 
-
+let options = {
+     viewEngine: {
+         extname: '.hbs',
+         layoutsDir: 'views/email/',
+         defaultLayout : 'template',
+         partialsDir : 'views/partials/'
+     },
+     viewPath: 'views/email/',
+     extName: '.hbs'
+ };
 
 let transporter = nodemailer.createTransport({
 	service : 'gmail',
@@ -17,8 +27,7 @@ let transporter = nodemailer.createTransport({
     	rejectUnauthorized: false
     }
 });
-
-
+transporter.use('compile', hb(options));
 
 
 function addProblem(req, res){
@@ -35,24 +44,29 @@ function addProblem(req, res){
 	problem.save((err, problemSaved)=>{
 		if(err) return res.status(500).send({ message: `Error al guardar en la base de datos: ${err}` })
 		transporter.sendMail({
-	from: 'Carlos cerda',
-	to: 'mariogodinezmedina@gmail.com',
-	subject: 'Nuevo correo de problema!',
-	text: `Problema - ${problemSaved.name}`,
-	html: `<div>
-				<div>
-					<img style="width:300px; margin-left:auto; margin-right:auto; style="display: inline-block;"" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxBTJyPXN6JTym-g-7mMiaXGgRQPSC2KJ3jWhIAdQ4GV7D7i1K">
-				</div>
-				<div>
-					<h3 style="display: inline-block;">Problema: <h3>
-					<p style="display: inline-block;">${problemSaved.name}</p>
-				</div>
+			from: 'Carlos cerda',
+			to: 'mariogodinezmedina@gmail.com',
+			subject: 'Nuevo correo de problema!',
+			text: `Problema - ${problemSaved.name}`,
+			template: 'email_body',
+		     context: {
+		          variable1 : 'value1',
+		          variable2 : 'value2'
+		     },
+			html: `<div>
+						<div>
+							<img style="width:300px; margin-left:auto; margin-right:auto; style="display: inline-block;"" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxBTJyPXN6JTym-g-7mMiaXGgRQPSC2KJ3jWhIAdQ4GV7D7i1K">
+						</div>
+						<div>
+							<h3 style="display: inline-block;">Problema: <h3>
+							<p style="display: inline-block;">${problemSaved.name}</p>
+						</div>
 
-				<div>
-					<h3 style="display:inline-block;">Descripccion del problema: <h3>
-					<p style="display:inline-block;">${problemSaved.description}</p>
-				</div>
-			</div>`
+						<div>
+							<h3 style="display:inline-block;">Descripccion del problema: <h3>
+							<p style="display:inline-block;">${problemSaved.description}</p>
+						</div>
+					</div>`
 
 }, (err, info) => {
 			if(err) {

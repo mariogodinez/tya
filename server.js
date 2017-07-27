@@ -4,7 +4,7 @@ const config = require('./config')
 const Problem = require('./models/problem')
 const app = require('./app')
 
-app.set('view-engine', 'pug')
+app.set('view-engine', '.hbs')
 
 // mongoose.connect(config.db, err => {
 // 	if(err){
@@ -14,11 +14,11 @@ app.set('view-engine', 'pug')
 // })
 
 app.get('/', function(req,res){
-	res.render('index.pug')
+	res.render('index.hbs')
 })
 
 app.get('/login', function(req,res){
-	res.render('index.pug')
+	res.render('index.hbs')
 })
 
 app.listen(config.port, () => console.log(`...Server listening at ${config.port}`) )
