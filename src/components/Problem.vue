@@ -1,7 +1,6 @@
 <script>
 	import axios from 'axios'
 	import HeaderComponent from './HeaderComponent.vue'
-	import sAlert from 'sweetalert'
 	export default {
 		name:'Problem',
 		data(){
@@ -33,12 +32,14 @@
 				$('.fa-chevron-down').toggleClass('hide')
 			},
 			sendProblem(){
-				sAlert({
-					title: "Error!",
-				  text: "Here's my error message!",
-				  type: "error",
-				  confirmButtonText: "Cool"
-				})
+					// sAlert({
+					// 	title: "Error!",
+					//   text: "Here's my error message!",
+					//   type: "error",
+					//   confirmButtonText: "Cool"
+					// })
+// guardar el usuario (id) y checarlo cuando se vota
+//cuando se crea un problema agregarle en el votedBy el usuario que lo creoo y que sirva como contador, ademas para no mostrar/ocultar en la seccion de votar de acorde a esa condicion
 				if(this.problemObj.name){
 				  	$('.loader-wrap').toggleClass('hide')
 					axios.post('/api/problem', this.problemObj)
@@ -51,7 +52,6 @@
 							this.problemObj.peopleWithoutProblem =  null
 							console.log(res)
 						  	$('.loader-wrap').toggleClass('hide')
-							alert('Se ha creado Correctamente')
 						})
 						.catch( err => console.log(err))
 				}

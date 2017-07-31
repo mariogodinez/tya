@@ -12,13 +12,17 @@ import ForgotPassword from './components/forgotPassword.vue'
 import ResetPassword from './components/ResetPassword.vue'
 import CorreoEnviado from './components/correo-enviado.vue'
 import ContraseñaExito from './components/ContraseñaExito.vue'
+import sAlert from 'sweetalert'
 
 import VueRouter from 'vue-router'
 import Vuetify from 'vuetify'
 import jQuery from 'jquery'
+import Is from 'is_js'
+
 let jquery = jQuery
 window.$ = window.jQuery = jquery
-
+window.is = Is
+window.sAlert = sAlert
 // window.myHeaders = Headers 
 
 Vue.use(VueRouter)
@@ -41,7 +45,7 @@ let routes = [
 ]
 
 let router = new VueRouter({
-	// mode: 'history',
+	mode: 'history',
 	routes
 })
 
