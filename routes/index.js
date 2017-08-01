@@ -14,6 +14,11 @@ api.put('/problem/voteDown/:problemId', ProblemCtrl.voteDown)
 api.post('/problem', ProblemCtrl.addProblem)
 api.post('/signup', UserCtrl.signUp)
 api.post('/login', UserCtrl.logIn)
+api.get('/allUsers', UserCtrl.allUsers)
+api.post('/getUser', UserCtrl.getUser)
+api.put('/editUser', UserCtrl.editUser)
+api.post('/deleteUser', UserCtrl.deleteUser)
+// api.delete('/deleteUser', UserCtrl.deleteUser)
 api.get('/private', auth, (req,res)=>{
 	res.status(200).send({
 		message: 'tienes aceso'

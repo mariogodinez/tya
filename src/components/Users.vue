@@ -3,24 +3,99 @@
 	import HeaderComponent from './HeaderComponent.vue'
 	import sAlert from 'sweetalert'
 	import ModalUser from './ModalUser.vue'
+	import ModalUserEdit from './ModalUserEdit.vue'
+
 	export default {
 		name:'Problem',
 		data(){
 			return {
-				
+				allUsers: [],
+				areas: []
 			}
 		},
 		components: {
 			HeaderComponent,
-			ModalUser
+			ModalUser,
+			ModalUserEdit
 		},
 		methods:{
+			getAllUsers(){
+				let self = this
+				axios.get('/api/allUsers')
+					.then(res => {
+						self.allUsers = res.data.users
+						let areas = res.data.users.map(item => item.area)
+						self.areas = areas
+					})
+					.catch(err => {
+						console.log(err)
+					})
+			},
+			deleteUser (user) {
+				let self = this
+				
+				sAlert({
+				  title: "",
+				  text: `Estás seguro que deseas eliminar a ${user.email} ?`,
+				  type: "info",
+				  showCancelButton: true,
+				  closeOnConfirm: false,
+				  showLoaderOnConfirm: true,
+				},
+				function(){
+					
+				  setTimeout(function(){
+					axios.post('/api/deleteUser', {id: user._id})
+				  		.then(res=>{
+				  			swal("¡Se ha eliminado!");
+				  			self.getAllUsers()
+
+				  		})
+				  		.catch(err => {
+				  		})
+					  }, 1000);
+				});
+			},
 			addUser(){
 				$('#myModal').modal('show')
+			},
+			newUser(){
+				let self = this
+				this.$on('newUser', function(data){
+					self.allUsers = data
+				})
+			},
+			addEmail (email) {
+				this.email = email 
+				
+			},
+			getUser (email) {
+				let self = this
+
+				axios.post('/api/getUser', {email: email})
+					.then(res => {
+						self.userToEdit = res.data.user
+						console.log(res.data.user)
+						self.$emit('userToEdit', res.data.user)
+					
+						$('#editUser').modal('show')
+						// self.userToEdit = res.data.user
+					})
 			}
 		},
+		mounted(){
+			let self = this
+			this.$on('newUser', function(data){
+				if(data){
+					this.getAllUsers()
+				}
+				
+			})
+		},
 		created(){
-
+			
+			this.getAllUsers()
+			
 		}
 	}
 </script>
@@ -31,6 +106,8 @@
     leave-active-class="animated fadeOut">
 	<section class="padding-top70">
 		<ModalUser></ModalUser>
+		<ModalUserEdit></ModalUserEdit>
+
 		<section class="margin20-40">
 			<article class="padding0 margin-top20 flex flex-between flex-middle">
 				<h3 class="margin0 text-uppercase font20 color-darkblue">Usuarios</h3>
@@ -57,22 +134,23 @@
 						<span class="color-gold fa fa-edit margin-left10"></span>
 					</div>
 				</section>
-				<section class="flex flex-between width100 padding10-0 margin-top10" style="border-bottom:1px solid grey;" v-for="i in 8">
+				<section class="flex flex-between width100 padding10-0 margin-top10" style="border-bottom:1px solid grey;" v-for="user in allUsers">
 					<div class="width100">
-						<h4 class="margin0 font20 font-normal">Nombre</h4>
+						<h4 class="margin0 font20 font-normal">{{user.fullName}}</h4>
 					</div>
 					<div class="width100">
-						<h4 class="margin0 font20 font-normal">ID</h4>
+						<h4 class="margin0 font20 font-normal">{{user.email}}</h4>
 					</div>
 					<div class="width100">
-						<h4 class="margin0 font20 font-normal">área</h4>
+						<h4 class="margin0 font20 font-normal">{{user.area}}</h4>
 					</div>
 					<div class="width100">
-						<h4 class="margin0 font20 font-normal">rol</h4>
+						<h4 class="margin0 font20 font-normal">{{user.rol}}</h4>
 					</div>
+
 					<div class="flex margin-right20" style="">
-						<span class="color-gold pointer margin-right20 fa fa-times-circle font20"></span>
-						<span class="color-gold pointer fa fa-edit font20"></span>
+						<span class="color-gold pointer margin-right20 fa fa-times-circle font20" @click="deleteUser(user)"></span>
+						<span class="color-gold pointer fa fa-edit font20" @click="getUser(user.email)"></span>
 					</div>
 				</section>
 			</article>

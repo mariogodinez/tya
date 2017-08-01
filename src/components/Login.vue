@@ -22,7 +22,7 @@
 						title: "Error!",
 						  text: "Por favor, ingresa tus datos!",
 						  type: "error",
-						  confirmButtonText: "ok",
+						  confirmButtonText: "OK",
 						  confirmButtonColor: "#a8843f"
 						})
 						return false
@@ -32,7 +32,7 @@
 						title: "Error!",
 						  text: "Ingresa un email válido!",
 						  type: "error",
-						  confirmButtonText: "ok",
+						  confirmButtonText: "OK",
 						  confirmButtonColor: "#a8843f"
 
 						})
@@ -45,19 +45,15 @@
 						title: "Error!",
 						  text: "Olvidaste escribir tu contraseña!",
 						  type: "error",
-						  confirmButtonText: "ok",
+						  confirmButtonText: "OK",
 						  confirmButtonColor: "#a8843f"
 
 						})
 						return false
 					}
 
-					// guardar el usuario (id) y checarlo cuando se vota
-					//cuando se crea un problema agregarle en el votedBy el usuario que lo creoo y que sirva como contador, ademas para no mostrar/ocultar en la seccion de votar de acorde a esa condicion
-
-
 					if(is.email(self.userInfo.email) && is.not.empty(self.userInfo.password)) {
-						axios.post('/api/signup', this.userInfo).then(res=>{
+						axios.post('/api/login', this.userInfo).then(res=>{
 							console.log(res)
 							if( res.status == 200 ){
 								self.$router.push('/')

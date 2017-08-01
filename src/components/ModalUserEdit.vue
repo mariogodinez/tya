@@ -3,7 +3,7 @@
 		data(){
 			return {
 				user:{
-					name:'',
+					fullName:'',
 					email:'',
 					area: '',
 					rol: '',
@@ -13,34 +13,32 @@
 			}
 		},
 		methods: {
-			addUser () {
+			editUser () {
 				let self = this
-				axios.post('/api/signUp', self.user)
+				axios.put('/api/editUser', self.user)
 					.then(res => {
-						$('#myModal').modal('hide')
-						console.log(res)
-						self.user = {
-							name:'',
-							email:'',
-							area: '',
-							rol: '',
-							password:''
-						}
+						$('#editUser').modal('hide')
 						setTimeout(function(){
-							sAlert("Genial!", "Se ha creado el usuario corréctamente", "success")
-
+							sAlert("Genial!", "Se ha modificado el usuario corréctamente", "success")
 						},500)
-
+						
 						axios.get('/api/allUsers')
-						.then(res => {
-							self.$parent.$emit('newUser', res.data.users)
-						})
-
-
+							.then(res => {
+								self.$parent.$emit('newUser', res.data.users)
+							})
 					})
+					.catch(err =>{
+						console.log(err)
+					})
+				
 			}
 		},
 		mounted(){
+			let self = this
+			this.$parent.$on('userToEdit', function(data){
+				self.user = data
+			})
+			
 		}
 	}
 </script>
@@ -55,12 +53,12 @@
 		</button> -->
 
 		<!-- Modal -->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index:1000000000000;">
+		<div class="modal fade" id="editUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index:1000000000000;">
 		  <div class="modal-dialog flex flex-middle flex-center" style="height:100%;" role="document">
 		    <div class="modal-content padding0-20" style="width:400px;min-height:200px;">
 		      <div class="modal-header padding0 border0">
 			      <div class="padding20" style="padding-bottom:0;">
-			      	<h5 class="margin0 text-uppercase">Crear Usuario</h5>
+			      	<h5 class="margin0 text-uppercase">Editar Usuario</h5>
 			      </div>
 		      		
 		        <div class="flex flex-center flex-middle square25 rounded color-white pointer" data-dismiss="modal" aria-label="Close" style="position:absolute; top:-30px; right:0px; border:1px solid white;">
@@ -69,7 +67,7 @@
 		      </div>
 		      <div class="modal-body padding20">
 		        <div class="margin-bottom15">
-		        	<input type="text" class="my-input-simple back-grisclaro" name="" placeholder="Nombre completo" v-model="user.name">
+		        	<input type="text" class="my-input-simple back-grisclaro" name="" placeholder="Nombre completo" v-model="user.fullName">
 		        </div>
 		        <div class="margin-bottom15">
 		        	<input type="text" class="my-input-simple back-grisclaro" name="" placeholder="ID" v-model="user.email">
@@ -89,7 +87,7 @@
 		        </div>
 		      </div>
 		      <div class="modal-footer border0" style="padding-top:0;">
-		        <button class="center-block my-btn back-gold color-white text-uppercase" style="width: 200px" @click="addUser">Crear Usuario</button>
+		        <button class="center-block my-btn back-gold color-white text-uppercase" style="width: 200px" @click="editUser">Guardar cambios</button>
 		      </div>
 		    </div>
 		  </div>

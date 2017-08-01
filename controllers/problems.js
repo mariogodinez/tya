@@ -60,7 +60,13 @@ function addProblem(req, res){
 			text: `Problema - ${problemSaved.name}`,
 			template: 'templateProblem',
 			context:{
-				problemName: problemSaved.name
+				problemName: problemSaved.name,
+				usersProblem: problemSaved.usersProblem,
+				activity: problemSaved.activity,
+				description: problemSaved.description,
+				peopleWithProblem: problemSaved.peopleWithProblem,
+				peopleWithoutProblem: problemSaved.peopleWithoutProblem,
+
 			}
 			}, (err, info) => {
 			if(err) {

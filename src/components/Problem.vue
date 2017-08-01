@@ -32,6 +32,7 @@
 				$('.fa-chevron-down').toggleClass('hide')
 			},
 			sendProblem(){
+				let self = this
 					// sAlert({
 					// 	title: "Error!",
 					//   text: "Here's my error message!",
@@ -40,9 +41,100 @@
 					// })
 // guardar el usuario (id) y checarlo cuando se vota
 //cuando se crea un problema agregarle en el votedBy el usuario que lo creoo y que sirva como contador, ademas para no mostrar/ocultar en la seccion de votar de acorde a esa condicion
+
+				if(is.empty(self.problemObj.name)){
+						sAlert({
+						title: "Error!",
+						  text: "Ingresa un título de problema que quieres  guardar!",
+						  type: "error",
+						  confirmButtonText: "ok",
+						  confirmButtonColor: "#a8843f"
+
+						})
+
+						return false
+					}
+
+				if(is.empty(self.problemObj.usersProblem)){
+					sAlert({
+					title: "Error!",
+					  text: "Describe los usuarios que tienen dicho problema!",
+					  type: "error",
+					  confirmButtonText: "ok",
+					  confirmButtonColor: "#a8843f"
+
+					})
+
+					return false
+				}
+				if(is.empty(self.problemObj.activity)){
+					sAlert({
+					title: "Error!",
+					  text: "Ingresa la actividad deseada!",
+					  type: "error",
+					  confirmButtonText: "ok",
+					  confirmButtonColor: "#a8843f"
+
+					})
+
+					return false
+				}
+
+				if(is.empty(self.problemObj.description)){
+					sAlert({
+					title: "Error!",
+					  text: "Por favor, describe el problema!",
+					  type: "error",
+					  confirmButtonText: "ok",
+					  confirmButtonColor: "#a8843f"
+
+					})
+
+					return false
+				}
+				if(self.problemObj.peopleWithProblem > 10){
+					sAlert({
+					title: "Error!",
+					  text: "La cantidad de usuarios debe ser menor o igual a 10",
+					  type: "error",
+					  confirmButtonText: "ok",
+					  confirmButtonColor: "#a8843f"
+
+					})
+
+					return false
+				}
+
+				if(self.problemObj.peopleWithoutProblem > 10){
+					sAlert({
+					title: "Error!",
+					  text: "La cantidad de usuarios debe ser menor o igual a 10",
+					  type: "error",
+					  confirmButtonText: "ok",
+					  confirmButtonColor: "#a8843f"
+
+					})
+
+					return false
+				}
+
+
+				if(!is.number(self.problemObj.peopleWithProblem) || !is.number(self.problemObj.peopleWithoutProblem)){
+					sAlert({
+					title: "Error!",
+					  text: "El campo de la cantidad de usuarios que tienen dicho problema debe de ser un número!",
+					  type: "error",
+					  confirmButtonText: "ok",
+					  confirmButtonColor: "#a8843f"
+
+					})
+
+					return false
+				}
+
 				if(this.problemObj.name){
 				  	$('.loader-wrap').toggleClass('hide')
-					axios.post('/api/problem', this.problemObj)
+					axios.post('/api/problem99999', this.problemObj)
 						.then((res)=> {
 							this.problemObj.name = ''
 							this.problemObj.usersProblem =  ''
