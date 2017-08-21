@@ -5,7 +5,6 @@
   "author": "Mario Godinez Medina <futureweb2000@gmail.com>",
   "private": true,
   "scripts": {
-    "start": "nodemon server.js",
     "styles": "stylus -w src/styles/app.styl -o dist/styles.css",
     "watchify": "watchify -vd -p browserify-hmr -e src/main.js -o dist/build.js",
     "serve": "http-server -o -c 1 -a localhost",
