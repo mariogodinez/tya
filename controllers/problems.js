@@ -1,7 +1,6 @@
 'use strict'
 const Problem = require('../models/problem')
 const nodemailer = require('nodemailer')
-const EmailTemplate = require('email-templates').EmailTemplate
 const config = require('../config.js')
 const path = require('path')
 const hbs = require('nodemailer-express-handlebars')
@@ -24,19 +23,6 @@ transporter.use('compile', hbs({
 	extName: '.hbs'
 }))
 
-function loadTemplate (templateName, context){
-	let template = new EmailTemplate(path.join(__dirname, 'templates', templateName))
-	return new Promise ((resolve, reject)=>{
-		template.render(context, (err, result)=>{
-
-			if(err) reject(err);
-			else resolve(result)
-
-		})
-	})
-}
-
-
 
 function addProblem(req, res){
 	console.log(req.body)
@@ -46,8 +32,11 @@ function addProblem(req, res){
 	problem.usersProblem = req.body.usersProblem
 	problem.activity = req.body.activity
 	problem.description = req.body.description
+	problem.canVote = req.body.canVote
+	problem.createdBy = req.body.createdBy
 	problem.peopleWithProblem = req.body.peopleWithProblem
 	problem.peopleWithoutProblem = req.body.peopleWithoutProblem
+
 
 	problem.save((err, problemSaved)=>{
 		if(err) return res.status(500).send({ message: `Error al guardar en la base de datos: ${err}` })
@@ -91,8 +80,26 @@ function getProblem(id){
 }
 
 function getProblems(req,res){
-	Problem.find({}, (err, problems) => {
+	console.log('datus user loged')
+	console.log(req.user)
+	console.log(req.email)
+	console.log(req.area)
+	let area = req.area.toString()
+	Problem.find({canVote : {$in: [area]}}, (err, problems) => {
 		if(err) return res.status(500).send({message: `Error al realizar la petición de los problemas`})
+		if(!problems) return res.status(404).send({ message: 'NO sen encontraron problemas guardados' })
+		let filter = problems.filter(problem => {
+			return problem.createdBy != req.email
+		})
+		// console.log(filter)
+		res.status(200).send({ problems: filter })
+
+	})
+}
+
+function getProblemsByArea(req,res){
+	Problem.find({area: req.body.area}, (err, problems) => {
+		if(err) return res.status(500).send({message: `Error al realizar la petición de los problemas filtrados por área`})
 		if(!problems) return res.status(404).send({ message: 'NO sen encontraron problemas guardados' })
 		
 		res.status(200).send({ problems })
@@ -119,12 +126,22 @@ function deleteProblem(req,res){
 
 function voteUp(req,res){
 	let problemId = req.params.problemId
+	let userToVote = req.body.user
+	//falta validar si un usuario ya votoo hacer un error
+
 	Problem.findById(problemId, (err, problem) => {
 		if(err) return res.status(500).send({message: `Error al realizar la petición`})
 		if(!problem) return res.status(404).send({ message: 'el problema que bsucas no existe' })
-		let count = problem.aproved		
+		
+		let users = problem.aproved
+		let votedBy = problem.votedBy
+
+		votedBy.push(userToVote)
+		users.push(userToVote)
+
 		let update = {
-			aproved : count + 1
+			aproved : users,
+			votedBy: votedBy,
 		}
 		  Problem.findByIdAndUpdate(problemId, update, (err, problemUp) => {
 		    if (err) res.status(500).send({message: `Problem updating error: ${err}`})
@@ -137,12 +154,21 @@ function voteUp(req,res){
 
 function voteDown(req,res){
 	let problemId = req.params.problemId
+	let userToVote = req.body.user
+	//falta validar si un usuario ya votoo hacer un error
 	Problem.findById(problemId, (err, problem) => {
 		if(err) return res.status(500).send({message: `Error al realizar la petición`})
 		if(!problem) return res.status(404).send({ message: 'el problema que bsucas no existe' })
-		let count = problem.rejected	
+		
+		let users = problem.rejected
+		let votedBy = problem.votedBy
+
+		votedBy.push(userToVote)
+		users.push(userToVote)
+
 		let update = {
-			rejected : count + 1
+			rejected : users,
+			votedBy: votedBy
 		}
 		  Problem.findByIdAndUpdate(problemId, update, (err, problemUp) => {
 		    if (err) res.status(500).send({message: `Problem updating error: ${err}`})

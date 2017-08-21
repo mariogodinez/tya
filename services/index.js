@@ -8,10 +8,12 @@ const config = require('../config')
 function createToken(user){
 	const payload = {
 		sub: user._id,
+		area: user.area,
+		email: user.email,
+		rol: user.rol,
 		iat: moment().unix(),
 		exp: moment().add(14, 'days').unix(),
 	}
-
 	return jwt.encode(payload, config.SECRET_TOKEN)
 }
 
@@ -25,18 +27,18 @@ function decodeToken(token){
 					message: 'El token ha expirado'
 				})
 			}
-
-			resolve(payload.sub)
+			console.log(payload)
+			resolve(payload)
 		} catch (err){
 			reject({
-				status: 500,
+				status: 401,
 				message: 'Token Invalido'
 			})
 		}
 	})
-
 	return decoded
 }
+
 
 
 

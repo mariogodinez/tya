@@ -4,17 +4,26 @@
 		data() {
 			return {
 				userInfo: {
-					email:'futureweb2000@gmail.com',
+					email:'ro@me.com',
 					password:''
 				}
 			}
 		},
+		beforeCreate () {
+			if (this.$store.state.logged) {
+                this.$router.push('/')
+            }
+        },
 		mounted() {
+            
 			/*this.$http.get(url + '/api/user-rol').then(response=>{
 				console.log(response.data)
 			})*/
 		},
 		methods:{
+			gopass(){
+				this.$router.push('/nueva-contrasena')
+			},
 			sendForm() {
 				let self = this
 					if(is.empty(self.userInfo.email) && is.empty(self.userInfo.password)){
@@ -53,24 +62,39 @@
 					}
 
 					if(is.email(self.userInfo.email) && is.not.empty(self.userInfo.password)) {
-						axios.post('/api/login', this.userInfo).then(res=>{
-							console.log(res)
-							if( res.status == 200 ){
-								self.$router.push('/')
-								localStorage.token = res.data.token
-							}
-						}).catch(error=>{
-							console.log(error)
-							sAlert({
-							title: "Error!",
-							  text: "Las credenciales no coinciden!",
-							  type: "error",
-							  confirmButtonText: "Intentar de nuevo",
-							  confirmButtonColor: "#a8843f"
+						$('.loader-wrap').toggleClass('hide')
+						setTimeout(function(){
+							axios.post('/api/login', self.userInfo).then(res=>{
+								console.log(res)
+								$('.loader-wrap').toggleClass('hide')
 
+								if( res.status == 200 ){
+									
+									
+									localStorage.token = res.data.token
+									localStorage.user = JSON.stringify(res.data.userLogged)
+									self.$store.dispatch('setUser', res.data.userLogged)
+									self.$store.dispatch('loginUser')
+
+									self.$router.push('/')
+
+								}
+							}).catch(error=>{
+								$('.loader-wrap').toggleClass('hide')
+
+								console.log(error)
+								sAlert({
+								title: "Error!",
+								  text: "Las credenciales no coinciden!",
+								  type: "error",
+								  confirmButtonText: "Intentar de nuevo",
+								  confirmButtonColor: "#a8843f"
+
+								})
+								console.log(error)
 							})
-							console.log(error)
-						})
+						}, 1000)
+						
 
 					}
 
@@ -97,7 +121,7 @@
     leave-active-class="animated fadeOut">
 	<section class="login flex flex-center flex-middle height100vh">
 		<article class="login-form  flex flex-column flex-middle padding40 margin-top20" style="width:400px;">
-			<figure class="margin-bottom30" style=" width:200px; margin-top:70px;">
+			<figure class="margin-bottom30" style=" width:160px; margin-top:90px;" @click="gopass">
 				<img src="img/tya_white.png" alt="" class="width100">
 			</figure>
 			<div class="margin-bottom20">

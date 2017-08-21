@@ -22,11 +22,10 @@
 					<span class="ion-navicon pointer" id="burger-menu" ></span>
 				</div>
 				<div class="flex flex-middle">
-
 					<div class="" >
 						<figure class="logo">
-								<img src="http://tya-register.dev/assets/app/img/tya_white.png" alt="">
-							</figure>
+							<img src="http://tya-register.dev/assets/app/img/tya_white.png" alt="">
+						</figure>
 					</div>
 				</div>
 			</article>
@@ -38,51 +37,51 @@
 		</header>
 
 		<nav class="my-nav" id="my-nav">
-		<ul class="my-nav-list">
+			<ul class="my-nav-list">
 
-			<li class="my-nav-list-item">
-				<router-link to="/app/homepage">
-					<span class="margin-right5">
-						<i class="fa fa-indent" aria-hidden="true"></i>
-					</span>
-					Registrar problema
-				</router-link>
-			</li>
+				<li class="my-nav-list-item">
+					<router-link to="/app/homepage">
+						<span class="margin-right5">
+							<i class="fa fa-indent" aria-hidden="true"></i>
+						</span>
+						Registrar problema
+					</router-link>
+				</li>
 
-			<li class="my-nav-list-item">
-				<router-link to="/app/homepage">
-					<span class="margin-right5">
-						<i class="fa fa-line-chart" aria-hidden="true"></i>
-					</span>
-					Mis problemas
-				</router-link>
-			</li>
-			<li class="my-nav-list-item">
-				<router-link to="/app/homepage">
-					<span class="margin-right5">
-						<i class="fa fa-key" aria-hidden="true"></i>
-					</span>
-					Votar problemas
-				</router-link>
-			</li>
+				<li class="my-nav-list-item">
+					<router-link to="/app/homepage">
+						<span class="margin-right5">
+							<i class="fa fa-line-chart" aria-hidden="true"></i>
+						</span>
+						Mis problemas
+					</router-link>
+				</li>
+				<li class="my-nav-list-item">
+					<router-link to="/app/homepage">
+						<span class="margin-right5">
+							<i class="fa fa-key" aria-hidden="true"></i>
+						</span>
+						Votar problemas
+					</router-link>
+				</li>
 
-			<li class="my-nav-list-item">
-				<router-link to="/app/homepage">
-					<span class="margin-right5">
-						<i class="fa fa-key" aria-hidden="true"></i>
-					</span>
-					Cambiar contraseña
-				</router-link>
-			</li>
-			<li class="my-nav-list-item">
-				<router-link to="/app/orders-done">
-					<span class="margin-right5">
-						<i class="fa fa-lock" aria-hidden="true"></i>
-					</span>
-					Cerrar sesión
-				</router-link>
-			</li>
-		</ul>
-	</nav>
+				<li class="my-nav-list-item">
+					<router-link to="/app/homepage">
+						<span class="margin-right5">
+							<i class="fa fa-key" aria-hidden="true"></i>
+						</span>
+						Cambiar contraseña
+					</router-link>
+				</li>
+				<li class="my-nav-list-item">
+					<router-link to="/app/orders-done">
+						<span class="margin-right5">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+						Cerrar sesión
+					</router-link>
+				</li>
+			</ul>
+		</nav>
 	</section>
 </template>

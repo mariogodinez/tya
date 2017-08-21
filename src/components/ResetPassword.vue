@@ -6,11 +6,11 @@
 				Crea una nuueva contraseña para recuperar el acceso a tu cuenta.
 			</p>
 			<div class="margin-bottom20">
-				<input type="text" class="my-input-simple back-grisclaro" placeholder="Ingresar nueva contraseña">
+				<input type="password" class="my-input-simple back-grisclaro" placeholder="Ingresar nueva contraseña">
 			</div>
 
 			<div>
-				<input type="text" class="my-input-simple back-grisclaro" placeholder="Confirmar nueva contraseña">
+				<input type="password" class="my-input-simple back-grisclaro" placeholder="Confirmar nueva contraseña">
 			</div>
 
 			<div class="center-block padding20-0" style="width:200px;">

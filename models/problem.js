@@ -11,10 +11,11 @@ let ProblemSchema = Schema({
 	description: String,
 	peopleWithProblem: Number,
 	peopleWithoutProblem: Number,
-	rejected: {type: Number, default: 0},
-	aproved: {type: Number, default: 0},
-	
-
+	rejected: Array,
+	aproved: Array,
+	canVote: Array,
+	createdBy: String,
+	votedBy: Array
 })
 
 module.exports = mongoose.model('Problem', ProblemSchema)

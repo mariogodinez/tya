@@ -92,6 +92,11 @@
 				
 			})
 		},
+		beforeCreate () {
+            if (!this.$store.state.logged) {
+                this.$router.replace('/login')
+            }
+        },
 		created(){
 			
 			this.getAllUsers()
@@ -120,13 +125,13 @@
 					<div class="width100">
 						<h4 class="margin0 text-uppercase">Nombre</h4>
 					</div>
-					<div class="width100">
+					<div class="" style="width:120%;">
 						<h4 class="margin0 text-uppercase">ID</h4>
 					</div>
-					<div class="width100">
+					<div class="" style="width:80%;">
 						<h4 class="margin0 text-uppercase">área</h4>
 					</div>
-					<div class="width100" style="">
+					<div class="" style="width:50%;">
 						<h4 class="margin0 text-uppercase">rol</h4>
 					</div>
 					<div class="flex margin-right20" style="visibility:hidden">
@@ -134,17 +139,17 @@
 						<span class="color-gold fa fa-edit margin-left10"></span>
 					</div>
 				</section>
-				<section class="flex flex-between width100 padding10-0 margin-top10" style="border-bottom:1px solid grey;" v-for="user in allUsers">
+				<section class="flex flex-between width100 padding20-0" style="border-bottom:1px solid grey;" v-for="user in allUsers">
 					<div class="width100">
 						<h4 class="margin0 font20 font-normal">{{user.fullName}}</h4>
 					</div>
-					<div class="width100">
+					<div class="" style="width:120%;">
 						<h4 class="margin0 font20 font-normal">{{user.email}}</h4>
 					</div>
-					<div class="width100">
+					<div class="" style="width:80%;">
 						<h4 class="margin0 font20 font-normal">{{user.area}}</h4>
 					</div>
-					<div class="width100">
+					<div class="" style="width:50%;">
 						<h4 class="margin0 font20 font-normal">{{user.rol}}</h4>
 					</div>
 

@@ -9,12 +9,14 @@ const User = new Schema({
 	email: { type: String, unique: true, lowercase: true, required: true},
 	password : { 
 		type: String,
-	    select: false
+	    select: true
 	},
 	signupDate: { type: Date, default: Date.now()},
 	lastLogin: Date,
 	rol: String,
-	area: String
+	area: String,
+	resetPasswordToken: String,
+	resetPasswordExpires: Date
 })
 
 User.pre('save',function(next){

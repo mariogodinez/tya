@@ -20,6 +20,7 @@
 						$('#editUser').modal('hide')
 						setTimeout(function(){
 							sAlert("Genial!", "Se ha modificado el usuario corréctamente", "success")
+							self.repeatPassword=''
 						},500)
 						
 						axios.get('/api/allUsers')
@@ -28,7 +29,7 @@
 							})
 					})
 					.catch(err =>{
-						console.log(err)
+						sAlert("Error!", "Por favor, intenta nuevamente", "error")
 					})
 				
 			}
@@ -80,10 +81,10 @@
 		        	<input type="text" class="my-input-simple back-grisclaro" name="" placeholder="Rol" v-model="user.rol">
 		        </div>
 		        <div class="margin-bottom15">
-		        	<input type="password" class="my-input-simple back-grisclaro" name="" placeholder="Crear contraseña" v-model="user.password">
+		        	<input type="password" class="my-input-simple back-grisclaro" name="" placeholder="Nueva contraseña" v-model="user.password">
 		        </div>
 		        <div class="margin-bottom15">
-		        	<input type="password" class="my-input-simple back-grisclaro" name="" placeholder="Confirmar contraseña" v-model="repeatPassword">
+		        	<input type="password" class="my-input-simple back-grisclaro" name="" placeholder="Confirmar nueva contraseña" v-model="repeatPassword">
 		        </div>
 		      </div>
 		      <div class="modal-footer border0" style="padding-top:0;">

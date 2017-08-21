@@ -10,16 +10,72 @@
 					usersProblem: '',
 					activity: '',
 					description: '',
+					canVote: [],
 					peopleWithProblem: null,
-					peopleWithoutProblem: null
-				}
-				
+					peopleWithoutProblem: null,
+					createdBy: ''
+				},
+				allUsers: [],
+				areas: [],
+				todos: true
 			}
 		},
 		components: {
 			HeaderComponent
 		},
+		computed:{
+			userInfo(){
+				return this.$store.getters.userInfo
+			}
+		},
+		beforeCreate () {
+            if (!this.$store.state.logged) {
+                this.$router.replace('/login')
+            }
+        },
+		created(){
+			let self = this
+			this.getAllUsers()
+			
+		},
 		methods:{
+			addCanVote(item,index){
+				
+				this.areas[index].checked = !this.areas[index].checked
+					let allChecked = this.areas.filter(i => {
+						return i.checked
+				})
+				console.log(allChecked)
+				if(allChecked.length < this.areas.length){
+					this.todos = false
+					// des-selecccionar 'todos'
+				}
+
+				if(allChecked.length == this.areas.length){
+					this.todos = true
+
+					// selecccionar 'todos'
+				}
+			},
+			toggleAllAreas(){
+				let self = this
+				this.todos = !this.todos
+				this.areas.forEach( item => item.checked = self.todos)
+			},
+			getAllUsers(){
+				let self = this
+				axios.get('/api/allUsers')
+					.then(res => {
+						self.allUsers = res.data.users
+						let areas = res.data.users.map(item => {
+							return {name: item.area, checked: true}
+						})
+						self.areas = areas
+					})
+					.catch(err => {
+						console.log(err)
+					})
+			},
 			rightToggler(){
 				$('.rightToMobile').toggleClass('right0')
 				$('.leftToMobile').toggleClass('hidden')
@@ -132,18 +188,40 @@
 					return false
 				}
 
+			
+
 				if(this.problemObj.name){
-				  	$('.loader-wrap').toggleClass('hide')
-					axios.post('/api/problem99999', this.problemObj)
+				  	let canVote = this.areas.filter(i => {
+						return i.checked
+					})
+					let myCanVote = canVote.map(item => item.name)
+
+					this.problemObj.canVote = myCanVote
+					
+					if(this.problemObj.canVote.length == 0){
+						sAlert({
+						  title: "Error!",
+						  text: "Elige quién puede votar este problema!",
+						  type: "error",
+						  confirmButtonText: "ok",
+						  confirmButtonColor: "#a8843f"
+						})
+						return false
+					}
+					this.problemObj.createdBy = JSON.parse(localStorage.user)
+					$('.loader-wrap').toggleClass('hide')
+					axios.post('/api/problem', this.problemObj)
 						.then((res)=> {
 							this.problemObj.name = ''
 							this.problemObj.usersProblem =  ''
 							this.problemObj.activity =  ''
 							this.problemObj.description =  ''
 							this.problemObj.peopleWithProblem =  null
+							this.todos = false
 							this.problemObj.peopleWithoutProblem =  null
-							console.log(res)
+							this.areas.forEach( item => item.checked = this.todos)
 						  	$('.loader-wrap').toggleClass('hide')
+						  	sAlert("Genial!", "Has registrado in nuevo problema", "success")
 						})
 						.catch( err => console.log(err))
 				}
@@ -223,28 +301,18 @@
 						</div>
 						<div class="width100 hide back-grisclaro" style="border-radius:3px; margin-top:2px;border:1px solid #e7e7e7;" id="slideIt">
 							<article class="flex flex-middle padding10">
-								<input type="checkbox" name="" class="margin-right10">
+								<div class=" margin-right10" style="position:relative; top:-7px;">
+			                        <input type="checkbox" :checked="todos" class="check" id="test1" @change="toggleAllAreas"/>
+			                       <label for="test1"></label>
+			                    </div>
 								<h4 class="font20 margin0">Todos</h4>
 							</article>
-
-							<article class="flex flex-middle padding10">
-								<input type="checkbox" name="" class="margin-right10">
-								<h4 class="font20 margin0">Gerencial</h4>
-							</article>
-
-							<article class="flex flex-middle padding10">
-								<input type="checkbox" name="" class="margin-right10">
-								<h4 class="font20 margin0">Desarrollo</h4>
-							</article>
-
-							<article class="flex flex-middle padding10">
-								<input type="checkbox" name="" class="margin-right10">
-								<h4 class="font20 margin0">Diseñadores UX</h4>
-							</article>
-
-							<article class="flex flex-middle padding10">
-								<input type="checkbox" name="" class="margin-right10">
-								<h4 class="font20 margin0">Diseñadores UX</h4>
+							<article class="flex flex-middle padding10" v-for="(item, index) in areas">
+								<div class=" margin-right10" style="position:relative; top:-7px;">
+			                        <input type="checkbox" :checked="item.checked" class="check" :id="item.name" @change="addCanVote(item, index)"/>
+			                       <label :for="item.name"></label>
+			                    </div>
+								<h4 class="font20 margin0">{{item.name}}</h4>
 							</article>
 						</div>
 					</div>
@@ -307,8 +375,7 @@
 				</article>
 				<article class="padding20 width100" style="min-height:290px;background:#d1d1d1">
 						<h4 class="text-uppercase">Otro ejemplo:</h4>
-						<p class="padding10-0 font20" style="padding-right:30px;">Hombres con barba de 25 a 55 años con barba <span class="color-gold">intentan</span> alistarse para irse al trabajo rápidamente  <span class="color-gold">pero</span> el tener que rasurarse los atrasa incumpliendo a su trabajo.
-
+						<p class="padding10-0 font20" style="padding-right:30px;">Hombres con barba de 25 a 55 años <span class="color-gold">intentan</span> alistarse para irse al trabajo rápidamente  <span class="color-gold">pero</span> el tener que rasurarse los atrasa incumpliendo a su trabajo.
 						</p>
 						<div class="flex flex-middle flex-between width100">
 							<p class="padding0 margin0 font20" style="padding-right:30px;">Métrica de validación:</p>

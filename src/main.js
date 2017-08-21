@@ -2,6 +2,8 @@
 // so you don't have to do: import Vue from 'vue/dist/vue'
 // This is done with the browser options. For the config, see package.json
 import Vue from 'vue'
+import store from './vuex/store'
+import VueCheckbox from 'vue-checkbox-radio'
 import App from './App.vue'
 import Login from './components/Login.vue'
 import Problem from './components/Problem.vue'
@@ -17,6 +19,7 @@ import sAlert from 'sweetalert'
 import VueRouter from 'vue-router'
 import Vuetify from 'vuetify'
 import jQuery from 'jquery'
+import VueDisabled from 'vue-disabled'
 import Is from 'is_js'
 
 let jquery = jQuery
@@ -25,10 +28,12 @@ window.is = Is
 window.sAlert = sAlert
 // window.myHeaders = Headers 
 
-Vue.use(VueRouter)
-
+Vue.use(VueRouter, VueCheckbox, VueDisabled)
 
 window.axios = require('axios')
+
+axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.token;
+
 
 let routes = [
 	{path: '/login', component: Login},
@@ -38,19 +43,38 @@ let routes = [
 
 	{path: '/problem-vote', component: ProblemVote},
 	{path: '/results', component: Result},
-	{path: '/nueva-contraseña', component: ResetPassword},
+	{path: '/nueva-contrasena', component: ResetPassword},
 	{path: '/users', component: Users},
 	{path: '/correo-enviado', component: CorreoEnviado},
-
 ]
 
 let router = new VueRouter({
-	// mode: 'history',
+	mode: 'history',
 	routes
 })
+
+
+
 
 let VueApp = new Vue({ // eslint-disable-line no-new
   el: '#app',
   router,
-  render: (h) => h(App)
+  store,
+  render: (h) => h(App),
+  created(){
+  }
+})
+
+$(document).ready(function(){
+	$('.my-nav-list-item a').on('click', function(e){
+		e.preventDefault()
+		$('#my-nav').removeClass('right0')
+	})
+})
+$(document).ready(function(){
+	$('.logout').on('click', function(e){
+		setTimeout(function(){
+        	window.location.reload()
+        },700)
+	})
 })

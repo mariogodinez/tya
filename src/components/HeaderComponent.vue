@@ -9,6 +9,17 @@
 
 		},
 		methods:{
+			toggleMenu(){
+				$('#my-nav').toggleClass('right0')
+			},
+			logout(){
+				localStorage.removeItem('token')
+				localStorage.removeItem('user')
+	            this.$store.dispatch('logoutUser')
+	            this.$router.replace('/login')
+			}
+		},
+		created(){
 
 		}
 	}
@@ -18,8 +29,8 @@
 	<section class="">
 		<header class="app-header back-lightgray flex flex-middle flex-between" >
 			<article class="flex flex-middle">
-				<div class="color-white margin-right15 " style="font-size: 45px;border-right:1px solid lightgray; padding:8px 27px 8px 0">
-					<span class="ion-navicon pointer" id="burger-menu" ></span>
+				<div class="color-white margin-right15 pointer" style="font-size: 45px;border-right:1px solid lightgray; padding:8px 27px 8px 0" @click="toggleMenu">
+					<span class="ion-navicon " id="burger-menu" ></span>
 				</div>
 				<div class="flex flex-middle">
 
@@ -41,7 +52,7 @@
 		<ul class="my-nav-list">
 
 			<li class="my-nav-list-item">
-				<router-link to="/app/homepage">
+				<router-link to="/">
 					<span class="margin-right5">
 						<i class="fa fa-indent" aria-hidden="true"></i>
 					</span>
@@ -50,7 +61,7 @@
 			</li>
 
 			<li class="my-nav-list-item">
-				<router-link to="/app/homepage">
+				<router-link to="/results">
 					<span class="margin-right5">
 						<i class="fa fa-line-chart" aria-hidden="true"></i>
 					</span>
@@ -58,29 +69,28 @@
 				</router-link>
 			</li>
 			<li class="my-nav-list-item">
-				<router-link to="/app/homepage">
+				<router-link to="/problem-vote">
 					<span class="margin-right5">
-						<i class="fa fa-key" aria-hidden="true"></i>
+						<i class="fa fa-calendar-check-o" aria-hidden="true"></i>
 					</span>
 					Votar problemas
 				</router-link>
 			</li>
-
 			<li class="my-nav-list-item">
-				<router-link to="/app/homepage">
+				<router-link to="/nueva-contraseña">
 					<span class="margin-right5">
 						<i class="fa fa-key" aria-hidden="true"></i>
 					</span>
 					Cambiar contraseña
 				</router-link>
 			</li>
-			<li class="my-nav-list-item">
-				<router-link to="/app/orders-done">
+			<li class="my-nav-list-item logout" >
+				<a @click="logout" class="pointer">
 					<span class="margin-right5">
 						<i class="fa fa-lock" aria-hidden="true"></i>
 					</span>
-					Cerrar sesión
-				</router-link>
+					<span>Cerrar sesión</span>
+				</a>
 			</li>
 		</ul>
 	</nav>

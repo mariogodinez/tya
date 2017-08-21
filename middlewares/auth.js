@@ -12,11 +12,15 @@ function isAuth(req, res, next){
 	const token = req.headers.authorization.split(' ')[1]
 	services.decodeToken(token)
 		.then(res =>{
-			req.user = res
+			req.user = res.sub
+			req.area = res.area
+			req.email = res.email
+			req.rol = res.rol
 			next()
 		})
-		.catch(res =>{
-			res.status(res.status)
+		.catch(response =>{
+			let myRes = response
+			res.status(myRes.status).send({message : myRes.message})
 		})
 	
 
