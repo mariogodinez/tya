@@ -17,7 +17,7 @@
 	<Loader></Loader>	
 	<div id="app" class="relative">
 		<HeaderComponent></HeaderComponent>
-		<!-- <nav class="" style="position: absolute; right: 300px; top:30px; z-index:1000000;">
+		<nav class="" style="position: absolute; right: 300px; top:30px; z-index:1000000;">
 			<ul class="">
 				<li class="">
 					<router-link style="color:white;" to="/login">login</router-link>
@@ -30,7 +30,7 @@
 
 				</li>
 			</ul>
-		</nav> -->
+		</nav>
 	     <router-view></router-view>
 	  </div>
 </section>
