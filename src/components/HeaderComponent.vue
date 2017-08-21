@@ -19,6 +19,11 @@
 	            this.$router.replace('/login')
 			}
 		},
+		computed:{
+			logged(){
+				return this.$store.state.logged
+			}
+		},
 		created(){
 
 		}
@@ -26,7 +31,7 @@
 </script>
 
 <template>
-	<section class="">
+	<section class="" v-if="logged">
 		<header class="app-header back-lightgray flex flex-middle flex-between" >
 			<article class="flex flex-middle">
 				<div class="color-white margin-right15 pointer" style="font-size: 45px;border-right:1px solid lightgray; padding:8px 27px 8px 0" @click="toggleMenu">

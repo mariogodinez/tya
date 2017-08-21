@@ -122,7 +122,8 @@
 	<section class="login flex flex-center flex-middle height100vh">
 		<article class="login-form  flex flex-column flex-middle padding40 margin-top20" style="width:400px;">
 			<figure class="margin-bottom30" style=" width:160px; margin-top:90px;" @click="gopass">
-				<img src="img/tya_white.png" alt="" class="width100">
+				<img src="http://elbuenfin.org/media/logo800x500tya.png" alt="" class="width100">
+				
 			</figure>
 			<div class="margin-bottom20">
 				<h3 class="text-uppercase  color-darkblue margin0 font20 text-center">
