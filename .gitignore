@@ -4,5 +4,4 @@ dist/build.js
 dist/styles.css
 yarn-error.log
 npm-debug.log
-config.js
 .log
