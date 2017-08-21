@@ -131,8 +131,6 @@
 				</h3>
 			</div>
 
-
-
 					<div style="border-radius: 5px 5px 0 0;" class="my-input-simple flex flex-middle" id="emailBox">
 						<span class="margin-left10 fa fa-user font20" style="color:#666"></span>
 						<input type="email" placeholder="Email" class="my-input-simple border0" v-model="userInfo.email" style="color:#6d6d6d"

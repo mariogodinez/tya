@@ -1,7 +1,5 @@
 .DS_Store
 node_modules
-dist/build.js
-dist/styles.css
 yarn-error.log
 npm-debug.log
 .log
