@@ -82,11 +82,11 @@
 				</router-link>
 			</li>
 			<li class="my-nav-list-item">
-				<router-link to="/nueva-contraseña">
+				<router-link to="/users">
 					<span class="margin-right5">
 						<i class="fa fa-key" aria-hidden="true"></i>
 					</span>
-					Cambiar contraseña
+					Usuarios
 				</router-link>
 			</li>
 			<li class="my-nav-list-item logout" >
