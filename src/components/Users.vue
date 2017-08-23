@@ -109,7 +109,7 @@
 <transition appear  name="custom-classes-transition"
     enter-active-class="animated fadeIn"
     leave-active-class="animated fadeOut">
-	<section class="padding-top70">
+	<section class="padding-top70 back-white">
 		<ModalUser></ModalUser>
 		<ModalUserEdit></ModalUserEdit>
 

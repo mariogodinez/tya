@@ -31,18 +31,18 @@
 
 						return false
 					}
-				$('.loader-wrap').toggleClass('hide')
+				$('.loader-wrap').removeClass('hide')
 				setTimeout(function(){
 					axios.post('/api/mail-reset', {email: self.email})
 						.then(res => {
 							if(res.status == 200){
-							$('.loader-wrap').toggleClass('hide')
+							$('.loader-wrap').addClass('hide')
 
 								self.$router.replace('/correo-enviado')
 							}
 						})
 						.catch(err => {
-							$('.loader-wrap').toggleClass('hide')
+							$('.loader-wrap').addClass('hide')
 							
 							self.error = true
 
@@ -55,7 +55,7 @@
 </script>
 
 <template>
-	<section class="back-white padding-top70">
+	<section class="back-white padding-top70 height100vh">
 		<article class="padding20 margin-top20 center-block" style="max-width:420px;">
 			<h4 class="text-uppercase">Olvidé mi contraseña</h4>
 			<p class="font20 margin-top10">

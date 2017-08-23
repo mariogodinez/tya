@@ -37,6 +37,7 @@
 			let self = this
 			this.getAllUsers()
 			
+			
 		},
 		methods:{
 			addCanVote(item,index){
@@ -236,7 +237,7 @@
 <transition appear  name="custom-classes-transition"
     enter-active-class="animated fadeIn"
     leave-active-class="animated fadeOut">
-	<section class="padding-top70">
+	<section class="padding-top70 back-white">
 		<article class="padding10-20 flex margin-top15 flex-between flex-middle">
 			<h3 class="margin0 text-uppercase font20 color-darkblue">Visión desde el problema</h3>
 			<button class="my-btn back-gold color-white text-uppercase" style="width: 200px" @click="sendProblem">Guardar</button>

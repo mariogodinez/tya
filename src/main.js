@@ -75,6 +75,6 @@ $(document).ready(function(){
 	$('.logout').on('click', function(e){
 		setTimeout(function(){
         	window.location.reload()
-        },700)
+        },300)
 	})
 })

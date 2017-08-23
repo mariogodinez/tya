@@ -77,6 +77,8 @@
 									self.$store.dispatch('loginUser')
 
 									self.$router.push('/')
+									window.location.reload()
+									
 
 								}
 							}).catch(error=>{

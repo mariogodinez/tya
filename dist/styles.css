@@ -346,6 +346,9 @@ h6 {
 .height220 {
   height: 220px;
 }
+.height100vh {
+  height: 100vh;
+}
 .pointer {
   cursor: pointer;
 }
@@ -626,7 +629,7 @@ opacity 0,
 body {
   margin: 0;
   padding: 0;
-  background: gris-claro;
+  background: #ededed;
   font-family: 'Roboto', 'sans-serif';
 }
 .main-content {

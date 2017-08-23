@@ -38,7 +38,7 @@
 <transition appear  name="custom-classes-transition"
     enter-active-class="animated fadeIn"
     leave-active-class="animated fadeOut">
-	<section class="padding-top70">
+	<section class="padding-top70 back-white">
 		<section class="padding0-20" v-if="problems.length > 0">
 			<article class="padding10-20 margin-top20">
 				<h3 class="margin0 text-uppercase font20 color-darkblue">
